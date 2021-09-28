@@ -1,0 +1,40 @@
+.bynder-trigger {
+    background-image: url('../images/bynder-logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 2em !important;
+    margin-bottom: 2em;
+}
+
+.bynder-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    // 168px is the width of Bynder thumbnails.
+    @media only screen and ( min-width: 168*7px ) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .bynder-item {
+        margin-bottom: 1.9em;
+        width: 242px;
+        padding-top: 1.25rem;
+
+        @media only screen and ( min-width: 168*7px ) {
+            margin-right: 1.9em;
+        }
+
+        img {
+            cursor: move;
+        }
+
+        .thumb-container {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bynder-item-remove {
+        }
+    }
+}

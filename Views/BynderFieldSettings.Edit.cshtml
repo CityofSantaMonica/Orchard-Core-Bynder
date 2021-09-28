@@ -1,0 +1,23 @@
+@model CSM.Bynder.Settings.BynderFieldSettings
+
+<div class="form-group">
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" asp-for="Required" checked="@Model.Required">
+        <label class="custom-control-label" asp-for="Required">@T["Required"]</label>
+        <span class="hint">— @T["Whether selecting a Bynder asset is required."]</span>
+    </div>
+</div>
+<div class="form-group">
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" asp-for="Multiple" checked="@Model.Multiple">
+        <label class="custom-control-label" asp-for="Multiple">@T["Multiple"]</label>
+        <span class="hint">— @T["Whether multiple Bynder assets can be selected."]</span>
+    </div>
+</div>
+<div class="form-group">
+    <div class="w-md-50 pr-md-3">
+        <label asp-for="Hint">@T["Hint"]</label>
+        <input asp-for="Hint" type="text" class="form-control" />
+    </div>
+    <span class="hint">@T["The hint text to display on the editor."]</span>
+</div>

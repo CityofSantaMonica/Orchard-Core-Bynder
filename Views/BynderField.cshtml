@@ -1,0 +1,15 @@
+@model CSM.Bynder.ViewModels.BynderFieldDisplayViewModel
+
+@{
+    var resource = Model.Resources.FirstOrDefault();
+
+    if (resource != null)
+    {
+        var resourceUri = resource.GetDerivative("Standard Image")?.Uri;
+
+        if (resourceUri != null)
+        {
+            <img src="@resourceUri" alt="@resource.Description" title="@resource.Name" />
+        }
+    }
+}

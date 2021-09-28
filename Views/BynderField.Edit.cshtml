@@ -1,0 +1,36 @@
+@model CSM.Bynder.ViewModels.BynderFieldEditViewModel
+@using OrchardCore.ContentManagement.Metadata.Models
+@using CSM.Bynder.Settings
+
+
+@{
+    var settings = Model.PartFieldDefinition.GetSettings<BynderFieldSettings>();
+}
+
+<style asp-src="~/CSM.Bynder/css/bynder-editor.css" debug-src="~/CSM.Bynder/css/bynder-editor.min.css"></style>
+<script asp-src="https://d8ejoa1fys2rk.cloudfront.net/5.0.5/modules/compactview/bynder-compactview-2-latest.js" at="Foot"></script>
+<script asp-name="jQuery" at="Foot"></script>
+<script asp-src="~/CSM.Bynder/js/bynder-editor.js" at="Foot" depends-on="jQuery-ui"></script>
+
+<div class="bynder-container form-group" id="@Html.IdFor(m => m)">
+    <div class="bynder-labels-container">
+        <label asp-for="ResourcesJson">@Model.PartFieldDefinition.DisplayName()</label>
+
+        @if (!string.IsNullOrWhiteSpace(settings.Hint))
+        {
+            <span class="hint">@settings.Hint</span>
+        }
+    </div>
+
+    <input asp-for="ResourcesJson" type="hidden" class="bynder-resources" value="@Model.ResourcesJson" />
+
+    <a href="#"
+       class="bynder-trigger btn btn-secondary btn-sm"
+       data-culture="@Orchard.CultureName().Replace('-', '_')"
+       data-portal-url="@Model.PortalUrl">
+        @T["Browse Bynder"]
+    </a>
+
+    <ol class="bynder-list row" data-remove-text="@T["Remove"]">
+    </ol>
+</div>
