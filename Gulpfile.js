@@ -30,7 +30,7 @@ gulp.task('build:styles', scssTargets.build(stylesBasePath, stylesDistBasePath))
 
 gulp.task('copy:assets', () => copyAssets(assets, distBasePath));
 
-gulp.task('default', gulp.parallel('build:scripts', 'build:styles'));
+gulp.task('default', gulp.parallel('build:scripts', 'build:styles', 'copy:assets'));
 
 gulp.task('watch', () => {
     watch(scriptsBasePath + '**/*.js', { verbose: true }, gulp.series('build:scripts'));
