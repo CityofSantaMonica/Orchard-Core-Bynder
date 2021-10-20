@@ -6,6 +6,8 @@
 
 An [Orchard Core](https://www.orchardcore.net/) module for integrating with the digital asset management platform [Bynder](https://www.bynder.com/en/). Foremost, it provides the Bynder Field content field that can be added to content parts so Bynder resources can be browsed and attached.
 
+You can also see a demo video of the module [here](https://www.youtube.com/watch?v=z2ZNxGOmIXs).
+
 Note that the module depends on [Lombiq Gulp Extensions](https://github.com/Lombiq/Gulp-Extensions) and [Lombiq NPM MSBuild Targets](https://github.com/Lombiq/NPM-Targets).
 
 
