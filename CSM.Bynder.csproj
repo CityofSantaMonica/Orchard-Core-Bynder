@@ -40,7 +40,7 @@
     <NpmDotnetPrebuildWatchedFiles Remove="package.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="package.json" />
+    <None Include="package.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Images\" />
