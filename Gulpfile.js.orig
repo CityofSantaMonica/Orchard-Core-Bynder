@@ -1,0 +1,29 @@
+const recommendedSetup = require('../../Utilities/Lombiq.Gulp.Extensions/recommended-setup');
+
+const assets = [
+    {
+        name: 'images',
+        path: './Assets/Images/**/*',
+    },
+];
+
+<<<<<<< Updated upstream
+recommendedSetup.setupRecommendedScssAndJsTasksAndCopyAssets(assets);
+=======
+gulp.task(
+    'build:scripts',
+    () => jsTargets.compile(
+        scriptsBasePath, scriptsDistBasePath, (pipeline) => pipeline.pipe(babel({ presets: ['@babel/preset-env'] }))));
+
+gulp.task('build:styles', scssTargets.build(stylesBasePath, stylesDistBasePath));
+
+gulp.task('copy:assets', () => copyAssets.copy(assets, distBasePath));
+
+gulp.task('default', gulp.parallel('build:scripts', 'build:styles', 'copy:assets'));
+
+gulp.task('watch', () => {
+    watch(scriptsBasePath + '**/*.js', { verbose: true }, gulp.series('build:scripts'));
+    watch(stylesBasePath + '**/*.scss', { verbose: true }, gulp.series('build:styles'));
+    watch(imagesGlob, { verbose: true }, gulp.series('build:scripts'));
+});
+>>>>>>> Stashed changes
