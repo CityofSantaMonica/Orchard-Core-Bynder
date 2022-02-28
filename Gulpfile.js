@@ -8,4 +8,3 @@ const assets = [
 ];
 
 recommendedSetup.setupRecommendedScssAndJsTasksAndCopyAssets(assets);
-gulp.task('copy:assets', () => copyAssets(assets, distBasePath));
