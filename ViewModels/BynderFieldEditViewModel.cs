@@ -7,7 +7,7 @@ namespace CSM.Bynder.ViewModels
     public class BynderFieldEditViewModel
     {
         public string PortalUrl { get; set; }
-        public List<BynderResource> Resources { get; } = new();
+        public ICollection<BynderResource> Resources { get; } = new List<BynderResource>();
         public string ResourcesJson { get; set; }
         public ContentPartFieldDefinition PartFieldDefinition { get; set; }
     }
