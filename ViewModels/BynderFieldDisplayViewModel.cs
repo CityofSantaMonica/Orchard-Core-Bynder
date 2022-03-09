@@ -5,9 +5,6 @@ namespace CSM.Bynder.ViewModels
 {
     public class BynderFieldDisplayViewModel
     {
-        public BynderFieldDisplayViewModel() =>
-           Resources = new List<BynderResource>();
-
-        public ICollection<BynderResource> Resources { get; }
+        public List<BynderResource> Resources { get; } = new();
     }
 }

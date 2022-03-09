@@ -19,9 +19,6 @@ namespace CSM.Bynder.Fields
 
     public class BynderResource
     {
-        public BynderResource() =>
-            Derivatives = new List<BynderResourceDerivative>();
-
         [JsonProperty("id")]
         public string Id { get; set; }
         [JsonProperty("hashId")]
@@ -31,7 +28,7 @@ namespace CSM.Bynder.Fields
         [JsonProperty("description")]
         public string Description { get; set; }
         [JsonProperty("derivatives")]
-        public ICollection<BynderResourceDerivative> Derivatives { get; }
+        public List<BynderResourceDerivative> Derivatives { get; } = new();
 
         public BynderResourceDerivative GetDerivative(string name) =>
             Derivatives.FirstOrDefault(derivative => string.Equals(derivative.Name, name, StringComparison.Ordinal));
@@ -39,9 +36,6 @@ namespace CSM.Bynder.Fields
 
     public class BynderField : ContentField
     {
-        public BynderField() =>
-            Resources = new List<BynderResource>();
-
-        public ICollection<BynderResource> Resources { get; }
+        public List<BynderResource> Resources { get; } = new();
     }
 }

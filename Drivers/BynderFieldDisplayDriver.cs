@@ -32,7 +32,7 @@ namespace CSM.Bynder.Drivers
         public override IDisplayResult Display(BynderField field, BuildFieldDisplayContext fieldDisplayContext) =>
             Initialize<BynderFieldDisplayViewModel>(
                 GetDisplayShapeType(fieldDisplayContext),
-                viewModel => viewModel.Resources.ToList().AddRange(field.Resources))
+                viewModel => viewModel.Resources.AddRange(field.Resources))
             .Location("Detail", "Content:5")
             .Location("Summary", "Content:5");
 
@@ -42,15 +42,12 @@ namespace CSM.Bynder.Drivers
                 viewModel =>
                 {
                     viewModel.PortalUrl = _bynderOptionsOptions.Value.PortalUrl;
-                    viewModel.Resources.ToList().AddRange(field.Resources);
+                    viewModel.Resources.AddRange(field.Resources);
                     viewModel.ResourcesJson = JsonConvert.SerializeObject(field.Resources.ToArray());
                     viewModel.PartFieldDefinition = context.PartFieldDefinition;
                 });
 
-        public override async Task<IDisplayResult> UpdateAsync(
-            BynderField field,
-            IUpdateModel updater,
-            UpdateFieldEditorContext context)
+        public override async Task<IDisplayResult> UpdateAsync(BynderField field, IUpdateModel updater, UpdateFieldEditorContext context)
         {
             var viewModel = new BynderFieldEditViewModel();
 
@@ -60,7 +57,7 @@ namespace CSM.Bynder.Drivers
 
             if (!string.IsNullOrWhiteSpace(viewModel.ResourcesJson))
             {
-                field.Resources.ToList().AddRange(JsonConvert.DeserializeObject<BynderResource[]>(viewModel.ResourcesJson));
+                field.Resources.AddRange(JsonConvert.DeserializeObject<BynderResource[]>(viewModel.ResourcesJson));
 
                 foreach (var resource in field.Resources.Where(resource => string.IsNullOrEmpty(resource.Description)))
                 {
