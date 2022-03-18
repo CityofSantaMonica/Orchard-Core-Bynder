@@ -8,24 +8,23 @@ using OrchardCore.ContentTypes.Editors;
 using OrchardCore.Environment.Shell.Configuration;
 using OrchardCore.Modules;
 
-namespace CSM.Bynder
+namespace CSM.Bynder;
+
+public class Startup : StartupBase
 {
-    public class Startup : StartupBase
+    private readonly IShellConfiguration _shellConfiguration;
+
+    public Startup(IShellConfiguration shellConfiguration)
     {
-        private readonly IShellConfiguration _shellConfiguration;
+        _shellConfiguration = shellConfiguration;
+    }
 
-        public Startup(IShellConfiguration shellConfiguration)
-        {
-            _shellConfiguration = shellConfiguration;
-        }
+    public override void ConfigureServices(IServiceCollection services)
+    {
+        services.Configure<BynderOptions>(_shellConfiguration.GetSection("CSM_Bynder"));
 
-        public override void ConfigureServices(IServiceCollection services)
-        {
-            services.Configure<BynderOptions>(_shellConfiguration.GetSection("CSM_Bynder"));
-
-            services.AddContentField<BynderField>()
-                .UseDisplayDriver<BynderFieldDisplayDriver>();
-            services.AddScoped<IContentPartFieldDefinitionDisplayDriver, BynderFieldSettingsDriver>();
-        }
+        services.AddContentField<BynderField>()
+            .UseDisplayDriver<BynderFieldDisplayDriver>();
+        services.AddScoped<IContentPartFieldDefinitionDisplayDriver, BynderFieldSettingsDriver>();
     }
 }
