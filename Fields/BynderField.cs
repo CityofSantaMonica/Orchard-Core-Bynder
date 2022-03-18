@@ -10,6 +10,7 @@ public class BynderResourceDerivative
 {
     [JsonProperty("name")]
     public string Name { get; set; }
+
     public Uri Uri { get; set; }
 
     // Only necessary for JSON de/serialization.
@@ -21,12 +22,16 @@ public class BynderResource
 {
     [JsonProperty("id")]
     public string Id { get; set; }
+
     [JsonProperty("hashId")]
     public string HashId { get; set; }
+
     [JsonProperty("name")]
     public string Name { get; set; }
+
     [JsonProperty("description")]
     public string Description { get; set; }
+
     [JsonProperty("derivatives")]
     public List<BynderResourceDerivative> Derivatives { get; } = new();
 
