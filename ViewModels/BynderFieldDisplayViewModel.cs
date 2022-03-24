@@ -1,10 +1,9 @@
 using CSM.Bynder.Fields;
 using System.Collections.Generic;
 
-namespace CSM.Bynder.ViewModels
+namespace CSM.Bynder.ViewModels;
+
+public class BynderFieldDisplayViewModel
 {
-    public class BynderFieldDisplayViewModel
-    {
-        public List<BynderResource> Resources { get; } = new();
-    }
+    public List<BynderResource> Resources { get; } = new();
 }
