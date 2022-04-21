@@ -2,7 +2,8 @@
     background-image: url("../images/bynder-logo.png");
     background-size: contain;
     background-repeat: no-repeat;
-    padding-left: 2em;
+    // stylelint-disable-next-line declaration-no-important -- Necessary to override
+    padding-left: 2em !important;
     margin-bottom: 2em;
 }
 
