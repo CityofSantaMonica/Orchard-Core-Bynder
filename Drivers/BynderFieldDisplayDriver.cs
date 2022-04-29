@@ -32,7 +32,7 @@ public class BynderFieldDisplayDriver : ContentFieldDisplayDriver<BynderField>
     public override IDisplayResult Display(BynderField field, BuildFieldDisplayContext fieldDisplayContext) =>
         Initialize<BynderFieldDisplayViewModel>(
             GetDisplayShapeType(fieldDisplayContext), viewModel =>
-                viewModel.AddResourcesAsync(field.Resources))
+                viewModel.AddResourceToDisplayViewModelAsync(field.Resources))
                     .Location("Detail", "Content:5")
                     .Location("Summary", "Content:5");
 
@@ -42,7 +42,7 @@ public class BynderFieldDisplayDriver : ContentFieldDisplayDriver<BynderField>
             async viewModel =>
             {
                 viewModel.PortalUrl = _bynderOptionsOptions.Value.PortalUrl;
-                await viewModel.AddResourcesAsync(field.Resources);
+                await viewModel.AddResourceToEditViewModelAsync(field.Resources);
                 viewModel.ResourcesJson = JsonConvert.SerializeObject(field.Resources.ToArray());
                 viewModel.PartFieldDefinition = context.PartFieldDefinition;
             });
@@ -57,7 +57,8 @@ public class BynderFieldDisplayDriver : ContentFieldDisplayDriver<BynderField>
 
         if (!string.IsNullOrWhiteSpace(viewModel.ResourcesJson))
         {
-            await field.AddResourcesAsync(JsonConvert.DeserializeObject<BynderResource[]>(viewModel.ResourcesJson));
+            await field.AddResourceToBynderFieldAsync(
+                JsonConvert.DeserializeObject<BynderResource[]>(viewModel.ResourcesJson));
 
             foreach (var resource in field.Resources.Where(resource => string.IsNullOrEmpty(resource.Description)))
             {

@@ -3,7 +3,6 @@ using OrchardCore.ContentManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CSM.Bynder.Fields;
 
@@ -42,14 +41,4 @@ public class BynderResource
 public class BynderField : ContentField
 {
     public IList<BynderResource> Resources { get; } = new List<BynderResource>();
-
-    public Task AddResourcesAsync(BynderResource[] resources)
-    {
-        foreach (var resource in resources)
-        {
-            Resources.Add(resource);
-        }
-
-        return Task.CompletedTask;
-    }
 }
