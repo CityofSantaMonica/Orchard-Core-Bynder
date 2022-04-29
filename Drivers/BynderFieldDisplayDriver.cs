@@ -31,23 +31,26 @@ public class BynderFieldDisplayDriver : ContentFieldDisplayDriver<BynderField>
 
     public override IDisplayResult Display(BynderField field, BuildFieldDisplayContext fieldDisplayContext) =>
         Initialize<BynderFieldDisplayViewModel>(
-            GetDisplayShapeType(fieldDisplayContext), viewModel =>
-                viewModel.AddResourceToDisplayViewModelAsync(field.Resources))
-                    .Location("Detail", "Content:5")
-                    .Location("Summary", "Content:5");
+                GetDisplayShapeType(fieldDisplayContext), viewModel =>
+                    viewModel.AddResourceToDisplayViewModel(field.Resources))
+            .Location("Detail", "Content:5")
+            .Location("Summary", "Content:5");
 
     public override IDisplayResult Edit(BynderField field, BuildFieldEditorContext context) =>
         Initialize<BynderFieldEditViewModel>(
             GetEditorShapeType(context),
-            async viewModel =>
+            viewModel =>
             {
                 viewModel.PortalUrl = _bynderOptionsOptions.Value.PortalUrl;
-                await viewModel.AddResourceToEditViewModelAsync(field.Resources);
+                viewModel.AddResourceToEditViewModel(field.Resources);
                 viewModel.ResourcesJson = JsonConvert.SerializeObject(field.Resources.ToArray());
                 viewModel.PartFieldDefinition = context.PartFieldDefinition;
             });
 
-    public override async Task<IDisplayResult> UpdateAsync(BynderField field, IUpdateModel updater, UpdateFieldEditorContext context)
+    public override async Task<IDisplayResult> UpdateAsync(
+        BynderField field,
+        IUpdateModel updater,
+        UpdateFieldEditorContext context)
     {
         var viewModel = new BynderFieldEditViewModel();
 
@@ -57,7 +60,7 @@ public class BynderFieldDisplayDriver : ContentFieldDisplayDriver<BynderField>
 
         if (!string.IsNullOrWhiteSpace(viewModel.ResourcesJson))
         {
-            await field.AddResourceToBynderFieldAsync(
+            field.AddResourceToBynderField(
                 JsonConvert.DeserializeObject<BynderResource[]>(viewModel.ResourcesJson));
 
             foreach (var resource in field.Resources.Where(resource => string.IsNullOrEmpty(resource.Description)))
