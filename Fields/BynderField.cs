@@ -33,13 +33,12 @@ public class BynderResource
     public string Description { get; set; }
 
     [JsonProperty("derivatives")]
-    public List<BynderResourceDerivative> Derivatives { get; } = new();
-
+    public IList<BynderResourceDerivative> Derivatives { get; } = new List<BynderResourceDerivative>();
     public BynderResourceDerivative GetDerivative(string name) =>
         Derivatives.FirstOrDefault(derivative => string.Equals(derivative.Name, name, StringComparison.Ordinal));
 }
 
 public class BynderField : ContentField
 {
-    public List<BynderResource> Resources { get; } = new();
+    public IList<BynderResource> Resources { get; } = new List<BynderResource>();
 }

@@ -14,10 +14,8 @@ public class Startup : StartupBase
 {
     private readonly IShellConfiguration _shellConfiguration;
 
-    public Startup(IShellConfiguration shellConfiguration)
-    {
+    public Startup(IShellConfiguration shellConfiguration) =>
         _shellConfiguration = shellConfiguration;
-    }
 
     public override void ConfigureServices(IServiceCollection services)
     {
