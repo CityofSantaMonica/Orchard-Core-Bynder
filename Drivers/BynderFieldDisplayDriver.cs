@@ -1,7 +1,6 @@
 using CSM.Bynder.Fields;
 using CSM.Bynder.Settings;
 using CSM.Bynder.ViewModels;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
