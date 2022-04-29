@@ -7,7 +7,7 @@ namespace CSM.Bynder;
 
 public static class BynderResourcesExtensions
 {
-    public static Task AddResourceToDisplayViewModelAsync(
+    public static void AddResourceToDisplayViewModel(
         this BynderFieldDisplayViewModel viewModel,
         IList<BynderResource> resources)
     {
@@ -15,11 +15,9 @@ public static class BynderResourcesExtensions
         {
             viewModel.Resources.Add(resource);
         }
-
-        return Task.CompletedTask;
     }
 
-    public static Task AddResourceToEditViewModelAsync(
+    public static void AddResourceToEditViewModel(
         this BynderFieldEditViewModel viewModel,
         IList<BynderResource> resources)
     {
@@ -27,11 +25,9 @@ public static class BynderResourcesExtensions
         {
             viewModel.Resources.Add(resource);
         }
-
-        return Task.CompletedTask;
     }
 
-    public static Task AddResourceToBynderFieldAsync(
+    public static void AddResourceToBynderField(
         this BynderField viewModel,
         BynderResource[] resources)
     {
@@ -39,7 +35,5 @@ public static class BynderResourcesExtensions
         {
             viewModel.Resources.Add(resource);
         }
-
-        return Task.CompletedTask;
     }
 }
