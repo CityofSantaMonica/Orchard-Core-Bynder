@@ -8,13 +8,11 @@ namespace CSM.Bynder.Settings;
 
 public class BynderFieldSettingsDriver : ContentPartFieldDefinitionDisplayDriver<BynderField>
 {
-    public override IDisplayResult Edit(ContentPartFieldDefinition model)
-    {
-        return Initialize<BynderFieldSettings>(
+    public override IDisplayResult Edit(ContentPartFieldDefinition model) =>
+        Initialize<BynderFieldSettings>(
             $"{nameof(BynderFieldSettings)}_Edit",
             settings => model.PopulateSettings(settings))
             .Location("Content");
-    }
 
     public override async Task<IDisplayResult> UpdateAsync(ContentPartFieldDefinition model, UpdatePartFieldEditorContext context)
     {

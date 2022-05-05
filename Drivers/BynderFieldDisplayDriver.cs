@@ -1,7 +1,6 @@
 using CSM.Bynder.Fields;
 using CSM.Bynder.Settings;
 using CSM.Bynder.ViewModels;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -31,10 +30,10 @@ public class BynderFieldDisplayDriver : ContentFieldDisplayDriver<BynderField>
 
     public override IDisplayResult Display(BynderField field, BuildFieldDisplayContext fieldDisplayContext) =>
         Initialize<BynderFieldDisplayViewModel>(
-            GetDisplayShapeType(fieldDisplayContext),
-            viewModel => viewModel.Resources.AddRange(field.Resources))
-        .Location("Detail", "Content:5")
-        .Location("Summary", "Content:5");
+                GetDisplayShapeType(fieldDisplayContext), viewModel =>
+                    viewModel.AddResourceToDisplayViewModel(field.Resources))
+            .Location("Detail", "Content:5")
+            .Location("Summary", "Content:5");
 
     public override IDisplayResult Edit(BynderField field, BuildFieldEditorContext context) =>
         Initialize<BynderFieldEditViewModel>(
@@ -42,12 +41,15 @@ public class BynderFieldDisplayDriver : ContentFieldDisplayDriver<BynderField>
             viewModel =>
             {
                 viewModel.PortalUrl = _bynderOptionsOptions.Value.PortalUrl;
-                viewModel.Resources.AddRange(field.Resources);
+                viewModel.AddResourceToEditViewModel(field.Resources);
                 viewModel.ResourcesJson = JsonConvert.SerializeObject(field.Resources.ToArray());
                 viewModel.PartFieldDefinition = context.PartFieldDefinition;
             });
 
-    public override async Task<IDisplayResult> UpdateAsync(BynderField field, IUpdateModel updater, UpdateFieldEditorContext context)
+    public override async Task<IDisplayResult> UpdateAsync(
+        BynderField field,
+        IUpdateModel updater,
+        UpdateFieldEditorContext context)
     {
         var viewModel = new BynderFieldEditViewModel();
 
@@ -57,7 +59,8 @@ public class BynderFieldDisplayDriver : ContentFieldDisplayDriver<BynderField>
 
         if (!string.IsNullOrWhiteSpace(viewModel.ResourcesJson))
         {
-            field.Resources.AddRange(JsonConvert.DeserializeObject<BynderResource[]>(viewModel.ResourcesJson));
+            field.AddResourceToBynderField(
+                JsonConvert.DeserializeObject<BynderResource[]>(viewModel.ResourcesJson));
 
             foreach (var resource in field.Resources.Where(resource => string.IsNullOrEmpty(resource.Description)))
             {
